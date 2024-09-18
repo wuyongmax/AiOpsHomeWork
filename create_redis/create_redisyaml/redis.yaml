@@ -1,0 +1,20 @@
+apiVersion: redis.tencentcloud.crossplane.io/v1alpha1
+kind: Instance
+metadata:
+  name: test
+spec:
+  forProvider:
+    port: 6379
+    chargeType: "POSTPAID"
+    name: redis
+    typeId: 15
+    passwordSecretRef:
+      key: redis_password
+      name: redis-creds
+      namespace: crossplane
+    availabilityZone: "ap-hongkong-2"
+    memSize: 256
+    vpcId: "vpc-r9j6yplk"
+    subnetId: "subnet-fbc7rryb"
+
+    

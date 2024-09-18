@@ -1,0 +1,4 @@
+1 cd create_k8s && terraform init && terraform plan && terraform apply --auto-approve #create vm and k3s platform and install crossplane
+2 cd tecent_provider # create provider which is monitor the dedicated resource creation then create the cloud resource
+3 export KUBECONFIG=path/config.yaml kubectl apply -f secret.yaml && kubectl apply -f provider.yaml  && kubectl apply -f providerConfig.yaml 
+4 kubectl create -f vpc.yaml kubectl apply -f subnet.yaml kubectl apply -f secret.yaml  kubectl apply -f redis.yaml 
