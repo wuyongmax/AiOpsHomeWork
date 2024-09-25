@@ -6,7 +6,7 @@ variable "secret_key" {
   default = "8DsaGpKrcLdddddME0cfhrz63C"
 }
 
-variable "regoin" {
+variable "region" {
   default = "ap-hongkong"
 }
 
