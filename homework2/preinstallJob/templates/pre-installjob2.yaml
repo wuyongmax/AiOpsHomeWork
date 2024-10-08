@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-pre-install"
+  labels:
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": pre-install #声明此 Job 作为 Pre-install Hook。
+    "helm.sh/hook-weight": "2"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    "description": "This job runs before the install process to prepare the environment. It is a pre-install hook."
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    metadata:
+      name: "{{ .Chart.Name }}"
+      labels:
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: pre-install-job
+        image: "busybox"
+        command: ['sh', '-c', 'echo "Pre-install hook 2" && sleep 15']
